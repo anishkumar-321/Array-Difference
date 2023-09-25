@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+
+vector<int>v;
+  int n,result=INT_MAX,maximum=0,minimum=0;
+  cin>>n;
+  for(int i=0;i<n;i++){
+    int value;
+    cin>>value;
+    v.push_back(value);
+    maximum=max(maximum,value);
+    minimum=min(minimum,value);
+  }
+  // if both the elements are odd then check
+  if(maximum%2!=0 and minimum%2!=0){
+     return min(abs(maximum-minimum),abs((min(maximum,minimum)*2)-max(maximum,minimum)));
+  }
+  //if the minimum is even element and the maximum is odd element then
+  else if(minimum%2==0 and maximum%2!=0){
+     return abs(minimum-maximum);
+  }
+  //if both elements are even then
+  else if(minimum%2==0 and maximum%2==0){
+    while(maximum%2==0 and abs(maximum-minimum)<result){
+        result=abs(maximum-minimum);
+        maximum/=2;
+    }
+}
+//if the maximum  is even element and the minimum element is odd element then
+else{
+    while(maximum%2==0 and abs(maximum-minimum)<result){
+        result=abs(maximum-minimum);
+        maximum/=2;
+    }
+    while(minimum%2!=0 and abs(maximum-minimum*2)<result){
+        result=abs(maximum-minimum*2);
+        minimum*=2;
+    }
+}
+return result;
+
+}
